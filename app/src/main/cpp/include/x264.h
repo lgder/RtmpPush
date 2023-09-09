@@ -542,7 +542,7 @@ typedef struct x264_param_t
     int i_slice_count_max;   /* Absolute cap on slices per frame; stops applying slice-max-size
                               * and slice-max-mbs if this is reached. */
 
-    /* Optional callback for freeing this x264_param_t when it is done being used.
+    /* Optional Callback for freeing this x264_param_t when it is done being used.
      * Only used when the x264_param_t sits in memory for an indefinite period of time,
      * i.e. when an x264_param_t is passed to x264_t in an x264_picture_t or in zones.
      * Not used when x264_encoder_reconfig is called directly. */
@@ -575,7 +575,7 @@ typedef struct x264_param_t
      * When this callback is enabled, x264_encoder_encode does not return valid NALs;
      * the calling application is expected to acquire all output NALs through the callback.
      *
-     * It is generally sensible to combine this callback with a use of slice-max-mbs or
+     * It is generally sensible to combine this Callback with a use of slice-max-mbs or
      * slice-max-size.
      *
      * The opaque pointer is the opaque pointer from the input frame associated with this
@@ -760,7 +760,7 @@ typedef struct x264_sei_t
 {
     int num_payloads;
     x264_sei_payload_t *payloads;
-    /* In: optional callback to free each payload AND x264_sei_payload_t when used. */
+    /* In: optional Callback to free each payload AND x264_sei_payload_t when used. */
     void (*sei_free)( void* );
 } x264_sei_t;
 
@@ -787,7 +787,7 @@ typedef struct x264_image_properties_t
      *     Adaptive quantization must be enabled to use this feature.  Behavior if quant
      *     offsets differ between encoding passes is undefined. */
     float *quant_offsets;
-    /* In: optional callback to free quant_offsets when used.
+    /* In: optional Callback to free quant_offsets when used.
      *     Useful if one wants to use a different quant_offset array for each frame. */
     void (*quant_offsets_free)( void* );
 
@@ -810,7 +810,7 @@ typedef struct x264_image_properties_t
      *      negatives, but no false positives.)
      */
     uint8_t *mb_info;
-    /* In: optional callback to free mb_info when used. */
+    /* In: optional Callback to free mb_info when used. */
     void (*mb_info_free)( void* );
 
     /* The macroblock is constant and remains unchanged from the previous frame. */

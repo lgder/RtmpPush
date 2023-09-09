@@ -1,13 +1,16 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
 }
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    namespace 'com.example.rtmp'
+    compileSdkVersion 33
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.xhunmon.rtmppush"
+        applicationId "com.example.rtmp"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -17,7 +20,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags ""
-                abiFilters 'armeabi-v7a'
+                abiFilters 'arm64-v8a'
             }
         }
     }
@@ -36,13 +39,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    ndkVersion '21.4.7075529'
 }
 
 dependencies {
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

@@ -1,8 +1,7 @@
-/**
- * description: 跟java中 Pusher.java 思想一样  <br>
- * @author 秦城季
- * @date 2020/12/6
- */
+/// @file Pusher.h
+/// @brief 推流类
+/// @author xhunmon
+/// @last_editor lq
 
 #ifndef RTMPPUSH_PUSHER_H
 #define RTMPPUSH_PUSHER_H
@@ -10,41 +9,39 @@
 #include "AudioTask.h"
 #include "VideoTask.h"
 
-
 static uint32_t start_time = 0;
-static SyncQueue<RTMPPacket *> packets;
+static SyncQueue<RTMPPacket*> packets;
 
-static void callback(RTMPPacket *packet);
+static void Callback(RTMPPacket* packet);
 
-static void release(RTMPPacket *&packet);
+static void Release(RTMPPacket*&packet);
 
-static void *pushTask(void *args);
-
+static void* PushTask(void* args);
 
 class Pusher {
-public:
-    Pusher(int fps, int bitRate, int sampleRate, int channels);
+ public:
+  Pusher(int fps, int bitRate, int sampleRate, int channels);
 
-    void encodeAudioData(signed char *data);
+  void EncodeAudioData(signed char* data);
 
-    void prepare(char *url);
+  void Prepare(char* url);
 
-    void stop();
+  void Stop();
 
-    void videoDataChange(int width, int height);
+  void VideoDataChange(int width, int height);
 
-    void encodeVideoData(int8_t *data);
+  void EncodeVideoData(int8_t* data);
 
-    u_long audioGetSamples();
+  u_long AudioGetSamples();
 
-public:
-    int isReadyPushing = 0;
-    char *url = 0;
-private:
-    pthread_t pid;
-    void *audioTask = 0;
-    void *videoTask = 0;
+ public:
+  int is_ready_pushing_ = 0;
+  char* url_ = 0;
+
+ private:
+  pthread_t pid_;
+  AudioTask* audio_task_;
+  VideoTask* video_task_;
 };
 
-
-#endif //RTMPPUSH_PUSHER_H
+#endif  // RTMPPUSH_PUSHER_H
